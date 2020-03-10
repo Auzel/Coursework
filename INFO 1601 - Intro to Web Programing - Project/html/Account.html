@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8"/>
+        <meta name="description" content="SAHARA checkout">
+        <meta name="keywords" content="SAHARA,buy,purchase, credit card, shipping results, UWI, students">
+        <meta name="author" content="Bevan Labadie, Philmon Roberts, Maria Cadogan">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sahara Checkout</title>  
+        
+		<link rel="shortcut icon" href="../images/desert_512_GYX_icon.ico">
+		<link rel="stylesheet" type="text/css" href="../css/mystyle1.css"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+           #mainHeading{
+               text-align:center;
+           }
+
+           section h3{
+                margin-top:50px;
+                margin-bottom:30px;
+                text-align: left;
+           }
+
+           #fNameAcc,#lNameAcc,#userNameAcc,#passwordAcc{
+                display:block;
+                margin-bottom:15px;
+           }
+
+          table{
+              width:90%;
+          }
+
+
+        </style>
+        <script src="../js/myscript.js"></script>
+        <script>
+            window.onload=function(){
+                var pos, infoPara;
+            
+                pos=localStorage.currIndex;
+                readFromStorage();
+                document.getElementById('cartCount').innerHTML=calcCartNum();
+
+                fName=users[pos].info.fName;
+                lName=users[pos].info.lName;
+                userName=users[pos].info.userName;
+                password=users[pos].info.password;
+
+                document.getElementById('fNameAcc').innerHTML+=fName;
+                document.getElementById('lNameAcc').innerHTML+=lName;
+                document.getElementById('userNameAcc').innerHTML+=userName;
+
+                
+                for(var i=0;i<password.length;i++){
+                    document.getElementById('passwordAcc').innerHTML+='*';
+                }
+
+                //my purchases
+                var picture,name,description, quant,price,category,id,listPrice,avgProdRating, sellerName, numSold, buyerName;
+
+                var myPurchases=document.getElementById('myPurchases');
+                for(var i=0;i<users[pos].buyer.purchased.length;i++){
+                    
+                    picture=users[pos].buyer.purchased[i].picture;
+					name=users[pos].buyer.purchased[i].name;
+					description=users[pos].buyer.purchased[i].description;
+					
+					quant=users[pos].buyer.purchased[i].quantity;
+					price=users[pos].buyer.purchased[i].price;
+					category=users[pos].buyer.purchased[i].category;
+					id=users[pos].buyer.purchased[i].id;
+					listPrice=users[pos].buyer.purchased[i].listPrice;
+                    avgProdRating=users[pos].buyer.purchased[i].avgProdRating;
+
+                    
+
+                    for(var k=0;k<users.length;k++){
+        				for(var l=0;l<users[k].seller.itemsSold.length;l++){
+							if(users[k].seller.itemsSold[l].id==id){
+								sellerName=users[k].info.fName + ' ' + users[k].info.lName;
+								numSold=users[k].seller.numSold;
+                            }
+
+                        }
+                    }
+                    
+                    var star=[];
+                   
+              
+                    myPurchases.innerHTML+=
+					'	<tr class="tableContent"> '
+					+'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+sellerName+'\',\''+numSold+'\');"><img class="preview" src="'+picture+'" alt="picture of '+name+'" /></a> </td> '
+					+'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+sellerName+'\',\''+numSold+'\');"> '+name+'</a></td> '
+					+'		<td><p>'+description+'</p></td> '
+					+'		<td><p>'+sellerName+'</p></td> '								
+					+'		<td>'+quant+'</td> '
+                    +'		<td>$'+price+'</td> '
+                    +'	    <td> <div class="starRating"> '
+                    +'		<span class="fa fa-star" onclick="rate(event,1,\''+id+'\')"></span> '
+                    +'		<span class="fa fa-star" onclick="rate(event,2,\''+id+'\')"></span> '
+                    +'		<span class="fa fa-star" onclick="rate(event,3,\''+id+'\')"></span> '
+                    +'		<span class="fa fa-star" onclick="rate(event,4,\''+id+'\')"></span> '
+                    +'		<span class="fa fa-star" onclick="rate(event,5,\''+id+'\')"></span> '
+                    +'	    </div> </td>'
+                    
+                    star=document.querySelectorAll('.starRating span');                    
+                    
+                    for(var k=star.length-5;k<star.length-5+avgProdRating;k++){
+                       
+                        star[k].classList.add('checked');			
+                    }
+                 
+                
+                    
+                    var resize=myPurchases.querySelectorAll('.preview');
+				    for(var k=0;k<resize.length;k++){
+                        resize[k].style.width='90px';
+                         resize[k].style.height='110px'; 
+				    }                          
+                    
+                }   
+
+                //my sold products
+                var mySold=document.getElementById('mySold');
+                for(var i=0;i<users[pos].seller.itemsSold.length;i++){
+                    picture=users[pos].seller.itemsSold[i].picture;
+                    name=users[pos].seller.itemsSold[i].name;
+                    description=users[pos].seller.itemsSold[i].description;
+                    
+                    quant=users[pos].seller.itemsSold[i].quantity;
+                    price=users[pos].seller.itemsSold[i].price;
+                    category=users[pos].seller.itemsSold[i].category;
+                    id=users[pos].seller.itemsSold[i].id;
+                    listPrice=users[pos].seller.itemsSold[i].listPrice;
+                    avgProdRating=users[pos].seller.itemsSold[i].avgProdRating;
+
+                    for(var k=0;k<users.length;k++){
+                        for(var l=0;l<users[k].buyer.purchased.length;l++){
+                            if(users[k].buyer.purchased[l].id==id){
+                                buyerName=users[k].info.fName + ' ' + users[k].info.lName;
+                                numSold=users[k].seller.numSold;
+                            }
+
+                        }
+                    }
+                    
+                    var star=[];
+                    
+                    mySold.innerHTML+=
+                    '	<tr class="tableContent"> '
+                    +'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+buyerName+'\',\''+numSold+'\');"><img class="preview" src="'+picture+'" alt="picture of '+name+'" /></a> </td> '
+                    +'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+buyerName+'\',\''+numSold+'\');"> '+name+'</a></td> '
+                    +'		<td><p>'+description+'</p></td> '
+                    +'		<td><p>'+buyerName+'</p></td> '								
+                    +'		<td>'+quant+'</td> '
+                    +'		<td>$'+price+'</td> '
+                    +'	    <td> <div class="starRating"> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'	    </div> </td>'
+                
+                    star=document.querySelectorAll('.starRating span');                    
+                    
+                    for(var k=star.length-5;k<star.length-5+avgProdRating;k++){
+                        
+                        star[k].classList.add('checked');			
+                    }
+                    
+                    var resize=mySold.querySelectorAll('.preview');
+				    for(var k=0;k<resize.length;k++){
+                        resize[k].style.width='100px';
+                        resize[k].style.height='120px'; 
+				    }     
+                    
+                    var headunderline=document.querySelectorAll('section h3');
+                   
+                    for(var k=0;k<headunderline.length;k++){
+                        headunderline[k].style.textDecoration='underline';
+                    }
+
+                    
+
+                }     
+
+
+                //my unsold products
+                var myUnSold=document.getElementById('myUnSold');
+                for(var i=0;i<users[pos].seller.itemsForSale.length;i++){
+                    picture=users[pos].seller.itemsForSale[i].picture;
+                    name=users[pos].seller.itemsForSale[i].name;
+                    description=users[pos].seller.itemsForSale[i].description;
+                    listPrice=users[pos].seller.itemsForSale[i].listPrice;
+                    quant=users[pos].seller.itemsForSale[i].quantity;
+                    price=quant*listPrice;
+                    category=users[pos].seller.itemsForSale[i].category;
+                    id=users[pos].seller.itemsForSale[i].id;                   
+                    avgProdRating=users[pos].seller.itemsForSale[i].avgProdRating;
+
+                    for(var k=0;k<users.length;k++){
+                        for(var l=0;l<users[k].buyer.purchased.length;l++){
+                            if(users[k].buyer.purchased[l].id==id){
+                                buyerName=users[k].info.fName + ' ' + users[k].info.lName;
+                                numSold=users[k].seller.numSold;
+                            }
+
+                        }
+                    }
+                    
+                    var star=[];
+                    
+                    myUnSold.innerHTML+=
+                    '	<tr class="tableContent"> '
+                    +'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+buyerName+'\',\''+numSold+'\');"><img class="preview" src="'+picture+'" alt="picture of '+name+'" /></a> </td> '
+                    +'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+buyerName+'\',\''+numSold+'\');"> '+name+'</a></td> '
+                    +'		<td><p>'+description+'</p></td> '
+                    +'		<td><p>'+buyerName+'</p></td> '								
+                    +'		<td>'+quant+'</td> '
+                    +'		<td>$'+price+'</td> '
+                    +'	    <td> <div class="starRating"> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'		<span class="fa fa-star"></span> '
+                    +'	    </div> </td>'
+                
+                    star=document.querySelectorAll('.starRating span');                    
+                    
+                    for(var k=star.length-5;k<star.length-5+avgProdRating;k++){
+                        
+                        star[k].classList.add('checked');			
+                    }
+                    
+                    var resize=myUnSold.querySelectorAll('.preview');
+				    for(var k=0;k<resize.length;k++){
+                        resize[k].style.width='100px';
+                        resize[k].style.height='120px'; 
+				    }     
+                    
+                    var headunderline=document.querySelectorAll('section h3');
+                   
+                    for(var k=0;k<headunderline.length;k++){
+                        headunderline[k].style.textDecoration='underline';
+                    }
+
+                    
+
+                }     
+                
+                
+                
+                
+            }
+
+            function rate(ev,j,id){
+                var star, pos, userName;
+                star=ev.target.parentElement.querySelectorAll('span');
+            
+                for(var i=0;i<5;i++){
+                    if(star[i].classList.contains('checked'))
+                        star[i].classList.remove('checked');			
+                }
+
+                for(var i=0;i<j;i++){
+                    star[i].classList.add('checked');			
+                } 
+
+            
+
+                var oldValue;
+                readFromStorage();
+                pos=localStorage.currIndex;
+                userName=users[pos].info.userName;
+
+                for(var i=0;i<users[pos].buyer.purchased.length;i++){
+                    if(users[pos].buyer.purchased[i].id==id){
+                        users[pos].buyer.purchased[i].rating=j;
+                    }
+                }
+
+                var sum=0, count=0,avg;
+                for(var i=0;i<users.length;i++){
+                   for(var j=0;j<users[i].buyer.purchased.length;j++){
+                       if(users[i].buyer.purchased[j].id==id){
+                           if(users[i].buyer.purchased[j].rating!==undefined){
+                                sum+=users[i].buyer.purchased[j].rating;
+                                count+=1;
+                           }
+                       }
+                   }
+                }
+                avg=sum/count;
+
+                if(avg){
+                    for(var i=0;i<users[pos].buyer.purchased.length;i++){
+                        if(users[pos].buyer.purchased[i].id==id){
+                            users[pos].buyer.purchased[i].avgProdRating=avg;
+                        }
+                    }
+
+                    for(var i=0;i<users.length;i++){
+                        for(var j=0;j<users[i].seller.itemsSold.length;j++){
+                               if(users[i].seller.itemsSold[j].id==id){
+                                users[i].seller.itemsSold[j].avgProdRating=avg;
+                            }
+                        }
+                    }
+
+                    for(var i=0;i<users.length;i++){
+                        for(var j=0;j<users[i].seller.itemsForSale.length;j++){
+                            if(users[i].seller.itemsForSale[j].id==id){
+                                users[i].seller.itemsForSale[j].avgProdRating=avg;
+                            }
+                        }
+                    }
+
+                    writetoStorage(users);
+
+                }                
+
+
+
+            }
+          
+
+        </script>
+	</head>
+
+	<body>
+        <header>
+            <div id="moto">The Best online store for all your UWI needs</div> <hr>
+            <div class="container">
+
+                <div id="topEdge" >					
+                    
+                    <div id="collection">
+                        <a id="logoWithCaption" href='index.html'>
+                        <div> <img src="../images/logo.png" alt="SAHARA logo"> <span id="logo">SAHARA</span> </div>						
+                        </a>					
+                            
+                        <form class="search" action="Buy.html" onsubmit="return search()">
+                            
+                            <input type="text" id='searchBox' placeholder="Search..">
+
+                            <button><i id='searchIcon' class="fa fa-search"></i></button>
+
+                        </form>
+                        
+                        <ul>
+                            <li><a href="Account.html">Account</a></li>
+                            <li><a href="Buy.html">Buy</a></li>
+                            <li><a href="Sell.html">Sell</a></li>
+                            <li><a href="Cart.html">Cart</a><span id="cartCount"></span></li>
+                        </ul>
+                        
+                        <i id="signOutIcon" class="fa fa-sign-out" onclick="logout(); alert('You have been successfully logged out.'); window.open('index.html','_self');"></i>
+                        
+                    </div>                     
+                </div>
+            </div>
+
+        </header>
+
+		<main class="container">
+            <h2 id="mainHeading">My Account</h2>
+            <section>
+                <h3>Personal Information</h3>
+                <p>
+                   <span id="fNameAcc">First Name: </span> 
+                   <span id="lNameAcc">Last Name: </span> 
+                   <span id="userNameAcc">User Name: </span> 
+                   <span id="passwordAcc">Password: </span>
+                </p>
+
+            </section>
+            <section>
+                <h3>Purchases</h3>
+                <table id="myPurchases">
+                    <tr>
+                        <th>Preview</th>
+                        <th>Item Name</th>
+                        <th>Description</th>
+                        <th>Seller</th>
+                        <th>Quantity</th> 
+                        <th>Price</th>
+                        <th>Rate Your Purchase</th>
+                    </tr>
+                </table>
+                    
+            </section>
+            <section>
+                <h3>Sold Products</h3>
+                <table id="mySold">
+                    <tr>
+                        <th>Preview</th>
+                        <th>Item Name</th>
+                        <th>Description</th>
+                        <th>Buyer</th>
+                        <th>Quantity</th> 
+                        <th>Price</th>
+                        <th>Your Product Rating</th>
+                    </tr>
+
+                </table>         
+            </section>
+            <section>
+                <h3>Unsold Products</h3>
+                <table id="myUnSold">
+                    <tr>
+                        <th>Preview</th>
+                        <th>Item Name</th>
+                        <th>Description</th>
+                        <th>Buyer</th>
+                        <th>Quantity</th> 
+                        <th>Price</th>
+                        <th>Your Product Rating</th>
+                    </tr>
+
+                </table>
+            
+                
+                    
+            </section>
+
+
+		</main>
+		
+		<footer> 
+            <div class="container"> 
+                <div id="contact">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="tel:(868)000-0000">(868) 000-0000</a></li>
+                        <li><a href="mailto:manager@sahara.com">manager@sahara.com</a></li>
+                        <li><a href="Construction.html">Location store</a></li>
+                    </ul>
+                </div>
+
+                <div id="policies">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="../misc/User_Guide.pdf" download>User Guide</a></li>
+                        <li><a href="Construction.html">Policy for Sellers</a></li>
+                        <li><a href="Construction.html">Policy for Buyers</a></li>    
+                    </ul>
+                </div>
+
+                <div id="quickLinks">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="Login.html">Login</a></li>
+                        <li><a href="Registration.html">Sign up</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div id="lastBar"> 
+                    <span id="Copyright"> Copyright &copy; 2019 SAHARA </span> 
+                    <i class="fa fa-cc-mastercard" style="font-size:16px"></i>
+                    <i class="fa fa-cc-visa" style="font-size:16px"></i>
+                    <i class="fa fa-cc-discover" style="font-size:16px"></i>
+
+                </div>
+            </div>
+        </footer>
+		
+	</body>
+</html>

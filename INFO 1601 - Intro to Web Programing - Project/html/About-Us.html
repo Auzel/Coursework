@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="What SAHARA does. How Sahara operates and functions.">
+    <meta name="keywords" content="SAHARA,Buy, sell, UWI, students">
+    <meta name="author" content="Bevan Labadie, Philmon Roberts, Maria Cadogan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Sahara</title>
+  
+    <link rel="stylesheet" type="text/css" href="../css/mystyle1.css">
+    <link rel="shortcut icon" href="../images/desert_512_GYX_icon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../js/myscript.js"></script>
+    <script>
+         window.onload=function(){
+            document.getElementById('cartCount').innerHTML=calcCartNum();
+        }
+    </script>
+    
+
+    <style>    
+
+        .mission{
+            border-bottom: 2px solid #2196F3;
+        }
+
+        #heading {
+            color: #2196F3;
+            font-size: 25px;
+        }
+
+        #team{
+            text-align: center;
+        }
+
+        #team #label{
+            color: #fff;
+            background-color: #cc0000;
+            width: 15%;
+            font-size: 20px;
+            display: inline-block;
+        }
+
+
+        #members ul{
+            display:inline-block;
+            margin-top: 20px;
+        }
+
+        #members li{
+            display:inline;
+            padding-right: 150px;
+        }
+
+        #names li{
+            padding-right: 250px;
+        }
+
+
+        #members img{
+            
+            border: 2px solid black;
+            
+        }
+
+        .centerFlex{
+            display:flex;
+            justify-content: space-around;
+        }
+
+        figure figcaption{
+            text-align: center;
+        }
+        article h1{
+            margin-top:30px;
+            text-align:center;
+        }
+   
+        #team{
+            margin-top:80px;
+        }
+
+    </style>
+  </head>
+
+  <body id="homey1">
+
+    <header>
+        <div id="moto">The Best online store for all your UWI needs</div> <hr>
+        <div class="container">
+
+            <div id="topEdge" >					
+                
+                <div id="collection">
+                    <a id="logoWithCaption" href='index.html'>
+                    <div> <img src="../images/logo.png" alt="SAHARA logo"> <span id="logo">SAHARA</span> </div>						
+                    </a>					
+                        
+                    <form class="search" action="Buy.html" onsubmit="return search()">
+                        
+                        <input type="text" id='searchBox' placeholder="Search..">
+
+                        <button><i id='searchIcon' class="fa fa-search"></i></button>
+
+                    </form>
+                    
+                    <ul>
+                        <li><a href="Account.html">Account</a></li>
+                        <li><a href="Buy.html">Buy</a></li>
+                        <li><a href="Sell.html">Sell</a></li>
+                        <li><a href="Cart.html">Cart</a><span id="cartCount"></span></li>
+                    </ul>
+                    
+                    <i id="signOutIcon" class="fa fa-sign-out" onclick="logout(); alert('You have been successfully logged out.'); window.open('index.html','_self');"></i>
+                    
+                </div>                     
+            </div>
+        </div>
+
+    </header>
+    
+    <article id="aboutUs" class="container">
+        <h1>About Us</h1>
+        <br>
+        
+        <div class="mission">
+            <p id="heading"><em>Mission</em></p>
+            <p>Our aim is to provide an online marketplace where students can sell and purchase pre-owned items at a reasonable cost without the hassle of organizing and processing.</p>
+
+        </div>
+        
+        <br>
+
+        <div class="mission">
+            <p>With this new website, no longer are students required to post in various social media groups to indicate their interest in buying or selling, nor required to perform face-to-face transaction at mutually convenient time and place for both the buyer and seller; thus, eliminating the perilous nature of meeting unfamiliar persons solely for the purpose of goods for cash.</p>
+            
+            <p>Prior to the implimentation of this website, students could only purchase compact personal items, such as books and school material from this storefront, but thanks to the newly employed delivery system, we have extended the options a little further. 
+                Electronics, furniture and kitchen supplies can now be sold via the click of a mouse!</p>
+        </div>
+
+        <br>
+
+        <div id="team">
+            <div id="label"><p><em>The Team</em></p></div>
+        </div>
+
+        <br>
+        
+        <div id="members" class="centerFlex">
+            <figure>
+                <img src="../images/member1.jpg" alt="Philmon_Roberts" height="210" >
+                <figcaption>Philmon Roberts</figcaption>
+            </figure>
+            <figure>
+                <img src="../images/member3.jpeg" alt="Maria_Cadogan" height="210" >
+                <figcaption>Maria Cadogan</figcaption>
+            </figure>
+            <figure>
+                <img src="../images/member2.jpg" alt="Bevan_Labadie" height="210">
+                <figcaption>Bevan Labadie</figcaption>
+            </figure>
+      
+        </div>
+        
+
+    </article>
+    
+    <footer> 
+        <div class="container"> 
+            <div id="contact">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="tel:(868)000-0000">(868) 000-0000</a></li>
+                    <li><a href="mailto:manager@sahara.com">manager@sahara.com</a></li>
+                    <li><a href="Construction.html">Location store</a></li>
+                </ul>
+            </div>
+
+            <div id="policies">
+                <h3>Documentation</h3>
+                <ul>
+                    <li><a href="../misc/User_Guide.pdf" download>User Guide</a></li>
+                    <li><a href="Construction.html">Policy for Sellers</a></li>
+                    <li><a href="Construction.html">Policy for Buyers</a></li>    
+                </ul>
+            </div>
+
+            <div id="quickLinks">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="Registration.html">Sign up</a></li>
+                    <li><a href="About-Us.html">About Us</a></li>
+                </ul>
+            </div>
+
+            <div id="lastBar"> 
+                <span id="Copyright"> Copyright &copy; 2019 SAHARA </span> 
+                <i class="fa fa-cc-mastercard" style="font-size:16px"></i>
+                <i class="fa fa-cc-visa" style="font-size:16px"></i>
+                <i class="fa fa-cc-discover" style="font-size:16px"></i>
+
+            </div>
+        </div>
+    </footer>
+
+  </body>
+
+</html>

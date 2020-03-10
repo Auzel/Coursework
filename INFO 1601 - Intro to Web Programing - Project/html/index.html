@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Homepage of SAHARA website">
+    <meta name="keywords" content="SAHARA, login, signin, home, homepage, shop, save, buy, UWI, students">
+    <meta name="author" content="Bevan Labadie, Philmon Roberts, Maria Cadogan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Sahara Home</title>
+    <link rel="shortcut icon" href="../images/desert_512_GYX_icon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+     
+        #homey5{
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            height:100%;
+            width:100%;
+            background-image: url("../images/homeback.jpg");
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            /*background: rgb(255, 255, 255);*/
+            background-size: cover;
+        }
+
+        img{
+                margin-top: 14px;
+                display: block;
+                height: 250px;
+                width: 250px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        h1{
+            margin-top: -2px;
+            font-size: 50px;
+            text-align: center;
+            font-family: Cambria,Georgia,serif; 
+            letter-spacing: 13px;
+            padding-left: 15px;
+            color: rgb(24, 24, 12);
+        }
+
+
+        button:hover{
+            background-color:green;
+        }
+        
+        button{
+            width: 200px;
+            height: 50px;
+            color: white;
+            background-color: #b2c4d2;
+            border: 2px solid black;
+            border-radius: 9px;
+            font-family:fantasy;
+            font-size: 20px;         
+            cursor:pointer;
+        }
+
+        .horizFlex{
+            margin-top:-20px;
+            display:flex;
+            justify-content: center;
+        }
+
+        .container
+        {
+            display:flex;
+            justify-content: space-evenly;
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-top:80px;
+        }
+        .container #left-box{
+            order:2;
+            padding: 50px;
+            display : inline-block;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid black;
+    
+            cursor: pointer;
+        }
+            .container #right-box{
+                order:1;
+                padding: 50px;
+                display : inline-block;
+                position:relative;
+                width: 200px;
+                height: 200px;
+                box-sizing: border-box;
+                overflow: hidden;
+                border-radius: 10px;
+                border: 2px solid black;
+                
+                cursor: pointer;
+            }
+        .container .box .icon{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f00;
+            transition: 0.5s;
+            z-index: 1;
+        }
+        .container .box:hover .icon{
+            top: 20px;
+            left: calc(50% - 40px);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+
+        }
+        .container .box .icon .fa{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 80px;
+            transition: 0.5s;
+            color: white;
+            opacity: 2.0%;
+        }
+        .container .box:hover .icon .fa{
+            font-size: 40px;
+            opacity: 2.0%;
+        }
+        .container .box .content{
+            position: absolute;
+            top: 100%;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: 0.5s;
+            opacity: 6%;
+        }
+        .container #left-box:hover .content{
+            top: 110px;
+            left: 35px;
+            text-align: center;
+            opacity: 100;
+            cursor: pointer;
+        }
+            .container #right-box:hover .content{
+                top: 110px;
+                left: 28px;
+                text-align: center;
+                opacity: 100;
+                cursor: pointer;
+            }
+        .container .box .content h3{
+            margin: 0 0 10px;
+            padding: 0;
+            color: #fff;
+            font-size: 24px;
+            text-align: center;
+        }
+        .container .box .content h3{
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+        .container .box:nth-child(1) .icon{
+            background: #b2c4d2;
+            opacity: 5;
+        }
+        .container .box:nth-child(1) {
+            background: #32bea6;
+            opacity: 1;
+        }
+        .container .box:nth-child(2) .icon{
+            background: #b2c4d2;
+        }
+        .container .box:nth-child(2) {
+            background: #32bea6
+        }
+
+        #homey5 img{
+            width:150px;
+            height:150px;
+        }
+    </style>
+  </head>
+
+  <body id="homey5">
+        <img src="../images/logo.png" alt="logo of Sahara">
+      <h1>SAHARA</h1>
+
+    <div class="container">
+        <div class="box" id="left-box" onclick="location.href='Login.html'">
+            <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+            <div class="content">
+                <h3>Sign-In</h3>
+            </div>
+        </div>
+
+      <div class="box" id="right-box" onclick="location.href='Registration.html'">
+          <div class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+          <div class="content">
+              <h3>Register</h3>
+          </div>
+      </div>
+      
+    </div>
+    <div class="horizFlex">
+        <button onclick="!localStorage.currIndex? alert('You may only visit as a registered user. Please Register and Login to proceed') : window.open('Buy.html','_self')">Visit our website</button>
+    </div>
+  </body>
+
+</html>
+

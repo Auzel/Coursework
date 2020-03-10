@@ -1,0 +1,506 @@
+/*UWI ID: 816008683
+Name: Philmon Roberts*/
+
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+/*JavaScript Editing*/
+
+/* You must deal with sell page problem if height is less than viewport set it to absolute*/
+/*and do other media queries*/
+/* keep certain things fixed.. collapse other things*/
+/* change sign and register to my account with adrop down*/
+
+
+
+/*General*/
+*{
+	box-sizing: border-box;
+}
+
+
+html,body{
+	background-color:#ffffff;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+	padding:0;
+	margin:0;
+}
+
+header{
+/*	background-color: #3399ff; */
+	background-color: #cc0000; 
+	color:#fff;
+	width:100%;
+}
+
+.container{
+	width:85%;
+	margin:auto;
+}
+
+ul{
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+
+a{
+	color:black; 
+}
+
+a:link {
+	text-decoration: none;
+}
+
+/*Specific*/
+
+#moto {
+	font-weight: bold;
+	text-align: center;
+	margin-left:-130px;
+	font-size: 0.8em;
+
+}
+
+#topEdge #collection{
+	display:flex;
+	justify-content:space-between;
+	flex-flow: row nowrap;
+
+}
+
+
+header hr{
+	margin-top:0;
+	margin-bottom:15px;
+	border-top: 0.1px solid white;
+}
+
+#topEdge img{
+	height:30px;
+	width:30px;
+}
+
+#topEdge #logo{
+	font-size: 20px;
+	vertical-align: 6px;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+#topEdge #logoWithCaption{
+	flex-shrink: 0;
+}
+
+#topEdge #logoWithCaption:hover{
+	transform: scale(1.05);
+
+}
+
+#topEdge form.search{
+	flex:0 6 500px;
+	margin-left:120px;
+	margin-top:-2px;
+}
+
+#topEdge form.search input[type=text] {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid grey;
+	float:left;
+	width:60%;
+	background: #f1f1f1ec;
+	border-radius: 24px;
+	outline-width: 0;
+	margin-left:100px;
+	margin-top:4px;
+	height:37px;
+	padding-right:50px;
+
+}
+
+#topEdge form.search button {
+	float:left;
+	width:10%;
+	padding:10px;
+	background: rgba(33, 149, 243, 0.856);
+	color: white;
+	font-size: 16px;
+	border: 1px solid grey;
+	border-left: none;
+	cursor: pointer;
+	border-radius: 24px;
+	outline-width: 0;
+	margin-left:-50px;
+	margin-top:4px;
+	height:37px;
+	
+}
+
+
+#topEdge form.search button hover{
+	background: #0b7dda;
+}
+
+#topEdge form.search::after{
+  clear: both;
+}
+
+#topEdge ul{
+	margin-top: 10px;
+	flex-shrink: 0;
+	font-size: 17px;
+}
+#signOutIcon{
+	cursor:pointer;
+	margin-top: 10px;
+	font-size:22px;
+}
+
+#signOutIcon:hover{
+	transform: scale(1.05);
+}
+
+#topEdge li{
+	display:inline-block;
+	padding-right:30px;
+}
+#topEdge li:last-child{
+	padding-right:0;
+}
+
+#topEdge a{
+	color:#fff; 
+
+}
+
+#topEdge li:hover{
+	transform: scale(1.05);
+}
+
+#topEdge a:active {
+	border-color: #2196F3; 
+}
+
+
+
+#navBar{
+	background-color: #E8E8E8;
+	color:#fff;
+}
+
+#navBar a:hover{
+	text-decoration: underline;
+}
+
+#navBar a:active {
+	text-decoration-color: #2196F3; 
+}
+
+
+#navBar ul{
+	display: inline-block;
+
+}
+
+#navBar li{
+	display: inline;
+	padding-right: 2em;
+}
+
+
+
+
+#tracker ul{
+	padding-top: 20px;
+
+}
+
+#tracker li + li:before{
+	content: ' / ';
+
+}
+
+#tracker li{
+	display: inline;
+}
+
+#tracker a:hover{
+	color: orange;
+}
+
+#generalBannnerBuy{
+	text-align: center;
+	font-size:40px;
+	margin-top:20px;
+	margin-bottom: 30px;
+}
+
+#bannerBuy{
+	text-align: center;
+	font-size:30px;
+}
+
+.broadHeading{
+	padding:10px;
+}
+
+
+#content{
+	font-size: 14px;
+	box-sizing: border-box;  
+} 
+
+#topBar{
+	display:flex;
+	justify-content: space-between;
+}
+
+#sort form{
+	display:inline-block;
+}
+
+
+#products{
+	margin-top: 50px;
+	display:flex;
+	flex-flow: row wrap;
+}
+
+
+#products figure{
+	justify-content: space-between;
+	width:100px;
+	margin-bottom: 50px;
+	
+}
+
+#products img{
+	width: 100%;
+	height:125px;
+}
+
+.cost{
+	font-weight: bold;
+}
+
+.sideToSide{
+	display:flex;
+	flex-direction:row-reverse; 
+	margin-top:50px;
+}
+
+
+.sideToSide #content{
+	flex:1;
+}
+
+.sideToSide #content a:hover{
+	color: darkorange;
+}
+
+.checked{
+	color:orange;
+}
+
+
+.sideToSide #sideContent {
+	font-size: 14px;
+	flex: 0 1 300px;
+	background-color: #fff;
+	color:#000;
+	padding:0 10px; 
+	box-sizing:border-box;
+}
+
+.sideToSide #sideContent a:hover{
+	color: orange;
+}
+
+
+.sideToSide #sideContent h3{
+	margin-top:30px;
+	margin-bottom:20px;
+}
+
+.sideToSide #sideContent li{
+	margin-bottom: 0.8em;
+	margin-left:0.5em;
+}
+
+#formData input[type=radio] {
+	margin-bottom:20px;
+	
+}
+
+.sideToSide #sideContent span{
+	margin-left:0.5em;
+}
+
+
+.sideToSide #sideContent input[name=Low], aside input[name=High]{
+	width:22%;
+	min-width: 30px;
+}
+
+#formData #filterBut{
+	margin-top:30px;
+	margin-left:30px;
+}
+
+
+footer{
+	background-color:#580000; 
+	color:#fff;
+	clear: both; 
+	font-size: 12px;
+	text-align:center;
+	padding:5px 20px 20px 20px;
+	margin-top: 100px; 
+}
+
+
+footer a{
+	color:#fff;
+}
+
+
+
+#contact,#policies,#quickLinks{
+	float:left;
+	width:33%;
+	padding: 0 30px;
+	box-sizing: border-box;
+}
+
+#lastBar{
+	clear: both;  
+	padding-top:20px;
+}
+
+#Copyright{
+	float:left;
+
+}
+#lastBar i{
+	float: right;
+	padding-right: 5px;
+
+} 
+
+
+/*tables*/
+
+table{
+	width:100%;
+	border-collapse: collapse;
+
+}
+
+table a:hover{
+	color:orange;
+}
+
+th{
+text-align: center;
+font-size:18px;
+padding-bottom:30px;
+}
+
+td{
+text-align: center;
+padding:10px;
+
+}
+
+
+tbody:nth-child(even){
+	background-color:#dae5f4;
+}
+
+
+img[alt="SAHARA logo"],img[src="./Images/logo.png"]{
+	height:30px;
+	width:30px;
+}
+
+/*Products Page*/
+.flexPr{
+	display:flex;
+	justify-content: space-between;
+	margin-top:50px;
+
+}
+
+#titlePr{
+	font-weight: 800;
+	font-size: 30px;
+}
+
+
+h2,h3{
+	text-align:center;
+	margin-bottom:40px;
+}
+
+#descriptPr h3{
+	margin-top:70px;
+}
+
+
+#CustRatingPr{
+	margin-top:30px;
+	margin-bottom:80px;
+}
+
+#costPr{
+	margin-top:30px;
+	margin-bottom:30px;
+}
+
+#selectPr{
+	width:70px;
+}
+
+#centerPr,#rightSidePr{
+	border: 1px solid black;
+	padding:40px;
+}
+
+
+#buttonPr{
+	margin-left:70px;
+}
+
+section p{
+	margin-bottom:30px;
+}
+
+/* cart*/
+#cartCount{
+	font-size:12px;			
+	background-color: rgba(33, 149, 243, 0.856);;
+	border-radius: 9px;
+	padding-left: 9px;
+	padding-right: 9px;
+	margin-left: 2px;
+	position:relative;
+	top:-8px;
+	  
+}
+
+/*
+@media(max-width:600px){
+	#main{
+		width:100%;
+		float:none;
+	}
+	#sidebar{
+		width:100%;
+		float:none;
+	}
+}
+*/
+

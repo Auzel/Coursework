@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Create an account for SAHARA website">
+    <meta name="keywords" content="SAHARA, registration, register, create, new, account, UWI, students">
+    <meta name="author" content="Bevan Labadie, Philmon Roberts, Maria Cadogan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title>Sahara Registration</title>    
+    <link rel="shortcut icon" href="../images/desert_512_GYX_icon.ico">
+    <link rel="Stylesheet" href="https://unpkg.com/ionicons@4.4.4/dist/css/ionicons.min.css">   
+    
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box}
+    
+    #logBod{
+      background-image: url("../images/loginback.jpg");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        /*background: rgb(255, 255, 255);*/
+        background-size: cover;
+    }
+    
+    .login-box{
+      width: 500px;
+      height: 560px;
+      margin: 20px;
+      border-radius: 20px;
+      margin: auto;
+      background: rgba(167, 160, 160, 0.8);
+      box-sizing: border-box;
+      padding: 40px;
+      color:#fff;
+      margin-top: 100px;
+      margin-bottom:20px;
+    }
+    
+    #logBod img{
+        height: 30px;
+        width: 30px;
+    }
+    
+    h1{
+      text-align: center;
+    }
+
+    #formTitle{
+      text-align: center;
+      margin-top: 50px;
+      font-weight: bold;
+      margin-bottom: -85px;
+      
+    }
+
+    input[type=text], input[type=password]{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 5px;
+      background: rgba(0,0,0,0.10);
+      outline: navy;
+      border: 1px solid navy;
+      border: none;
+      border-bottom: 1px double #fff;
+      color: rgb(243, 239, 239);
+      border-radius: 5px;
+      margin: 10px;
+      font-weight: bold;
+      height: 40px;
+      margin-bottom: 25px;
+    }
+
+    input[type=submit]{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 0;
+      margin-top: 30px;
+      outline:2px red;
+      border: red;
+      background: #60adde;
+      opacity: 0.7;
+      border-radius:20px;
+      font-size:20px;
+      color:#fff;
+    }
+
+    input[type=submit]:hover{
+      background: #003366;
+      opacity: 0.7;
+      outline: 10px red;
+      cursor: pointer;
+    }
+    
+    </style>
+    <script src="../js/myscript.js"></script>
+
+</head>
+
+
+
+
+
+<body id="logBod">
+
+    <h1><img src="../images/logo.png" alt="SAHARA logo">SAHARA</h1>
+
+    <p id="formTitle">User Registration Form</p>
+
+    <form onsubmit="return register(event)">
+        <div class="login-box">
+            
+            <input type="text" id="fNameReg" placeholder="First Name" autocomplete="off" required>
+            
+            <input type="text" id="lNameReg" placeholder="Last Name" autocomplete="off" required>
+
+            <input type="text" id="uNameReg" placeholder="Username" autocomplete="off" required>
+
+            <input type="password" id="pwordReg" placeholder="Password" autocomplete="off" required>
+
+            <input type="password" id="pwordReg1" placeholder="Confirm Password" autocomplete="off" required>    
+            <p>Before proceeding, kindly view our <a href="../misc/User_Guide.pdf" download style="color:dodgerblue">User Guide</a>.</p>            
+            
+            <input type="submit" class="signupbtn" id="buttonLog" value="Register">
+        </div>
+    </form>
+
+</body>
+</html>

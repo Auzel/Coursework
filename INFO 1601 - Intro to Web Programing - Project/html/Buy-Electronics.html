@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="Purchase electronics at Sahara">
+		<meta name="keywords" content="SAHARA,Buy, electronics, cellphones, cellular, phones, tablets, computer, laptop, pc, macbook UWI, students">
+		<meta name="author" content="Bevan Labadie, Philmon Roberts, Maria Cadogan">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sahara Buy - Electronics</title>  
+		<link rel="shortcut icon" href="../images/desert_512_GYX_icon.ico">
+		<link rel="stylesheet" type="text/css" href="../css/mystyle1.css"> 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			.broadHeading{
+				background: url("../images/bannerElectronics.jpg");
+				background-position:-150px 40px;
+				color:white;
+			}
+		</style>
+		<script src="../js/myscript.js"></script>
+	</head>
+
+	<body id="buyBod" onload="initBuy()">
+		<header>
+			<div id="moto">The Best online store for all your UWI needs</div> <hr>
+			<div class="container">
+
+				<div id="topEdge" >					
+					
+					<div id="collection">
+						<a id="logoWithCaption" href='index.html'>
+						<div> <img src="../images/logo.png" alt="SAHARA logo"> <span id="logo">SAHARA</span> </div>						
+						</a>					
+							
+						<form class="search" action="Buy.html" onsubmit="return search()">
+							
+							<input type="text" id='searchBox' placeholder="Search..">
+
+							<button><i id='searchIcon' class="fa fa-search"></i></button>
+
+						</form>
+						
+						<ul>
+							<li><a href="Account.html">Account</a></li>
+							<li><a href="Buy.html">Buy</a></li>
+							<li><a href="Sell.html">Sell</a></li>
+							<li><a href="Cart.html">Cart</a><span id="cartCount"></span></li>
+						</ul>
+						
+						<i id="signOutIcon" class="fa fa-sign-out" onclick="logout(); alert('You have been successfully logged out.'); window.open('index.html','_self');"></i>
+						
+					</div>                     
+				</div>
+			</div>
+
+		</header>
+
+		<nav id="navBar">
+			<div class="container">
+			<ul>
+					<li><a href="Buy.html">All</a></li>
+					<li><a href="Buy-Electronics.html">Electronics</a></li>
+					<li><a href="Buy-Stationery.html">Stationery</a></li>
+					<li><a href="Buy-Course-Materials.html">Course Materials</a></li>
+					<li><a href="Buy-Dorm-Furnishings.html">Dorm Furnishings</a></li>
+					<li><a href="Buy-Books.html">Books</a></li>
+			</ul>
+		
+			</div>
+		</nav>
+		
+		<nav class="container">
+			<div id="tracker">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="Buy.html">Buy</a></li>
+					<li><a href="Buy-Electronics.html">Electronics</a></li>  <!-- make dynamic of h2 below and this line-->
+				</ul>
+			</div>	
+		</nav>
+
+		<div class="container">
+			<div class="broadHeading">
+				<h2 id='generalBannnerBuy'>SAHARA BUY</h2>
+				<h3 id="bannerBuy"></h3>
+			</div>
+		</div>
+		
+
+		<div class="container">
+			<h2> </h2> 		<!--needs to be dynamic-->
+			<div class="sideToSide">
+				<main id="content">					
+						
+					<div id="topBar">
+
+						<div id="results">Showing<span id='changeNum'></span> results</div>  <!--needs to be dynamic-->
+						
+						<div id="sort">
+							Sort by:					
+							<form>
+								<select name="sortBy" id='sortPr' onchange="filterBuy()">
+									<option value="Name">Name</option> 
+									<option value="Cust Rating">Avg Customer Rating</option> 
+									<option value="Price H-L">Price: High to Low</option> 
+									<option value="Price L-W">Price: Low to High</option>				
+									
+								</select>
+							</form>
+						</div>
+					</div>
+
+					<div id="products"></div>						
+					
+				</main>
+
+
+				<aside id="sideContent">						
+				
+					<em id='filterBuyLabel'>Filter by:</em>
+
+					<form id="formData">
+						<h3><label>Pre-owned </label></h3>
+						<input type="radio" name="OwnDate" value="1-2">1-2 Years<br>
+						<input type="radio" name="OwnDate" value="3-4">3-4 Years<br>
+						<input type="radio" name="OwnDate" value="5-6">5-6 Years<br>
+						<input type="radio" name="OwnDate" value=">6"> > 6 Years<br>
+
+					
+						<h3><label>Price </label></h3>
+						<span>Start</span> <input type="number" name="Low" step="0.01" placeholder="$"> to <input type="number" name="High" step="0.01" placeholder="$">
+
+						<div id="filterBut">
+							<input type="reset"  value="Clear" onclick="initBuy()">
+							<input type="button"  value="Go" onclick="filterBuy()">											
+						</div>							
+					
+					</form>
+						
+				</aside>
+			</div>
+		</div>
+		<footer> 
+			<div class="container"> 
+				<div id="contact">
+					<h3>Contact Us</h3>
+					<ul>
+						<li><a href="tel:(868)000-0000">(868) 000-0000</a></li>
+						<li><a href="mailto:manager@sahara.com">manager@sahara.com</a></li>
+						<li><a href="Construction.html">Location store</a></li>
+					</ul>
+				</div>
+
+				<div id="policies">
+					<h3>Documentation</h3>
+					<ul>
+						<li><a href="../misc/User_Guide.pdf" download>User Guide</a></li>
+						<li><a href="Construction.html">Policy for Sellers</a></li>
+						<li><a href="Construction.html">Policy for Buyers</a></li>    
+					</ul>
+				</div>
+
+				<div id="quickLinks">
+					<h3>Quick Links</h3>
+					<ul>
+						<li><a href="Login.html">Login</a></li>
+						<li><a href="Registration.html">Sign up</a></li>
+						<li><a href="About-Us.html">About Us</a></li>
+					</ul>
+				</div>
+
+				<div id="lastBar"> 
+					<span id="Copyright"> Copyright &copy; 2019 SAHARA </span> 
+					<i class="fa fa-cc-mastercard" style="font-size:16px"></i>
+					<i class="fa fa-cc-visa" style="font-size:16px"></i>
+					<i class="fa fa-cc-discover" style="font-size:16px"></i>
+
+				</div>
+			</div>
+		</footer>
+		
+	</body>
+</html>

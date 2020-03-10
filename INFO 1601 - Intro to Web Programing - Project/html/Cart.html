@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="Shopping Cart">
+		<meta name="keywords" content="SAHARA, buy, shopping cart, purchase, UWI, students">
+		<meta name="author" content="Bevan Labadie, Philmon Roberts, Maria Cadogan">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sahara Cart</title>
+		<link rel="shortcut icon" href="../images/desert_512_GYX_icon.ico">
+		<link rel="stylesheet" type="text/css" href="../css/mystyle1.css"> 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			#cart h2{
+				text-align: center;
+			}
+		
+			#checkoutBut{
+				width: 165px;
+				float:right;
+				cursor:pointer;
+			}
+			#checkoutBut::after{
+				clear:right;
+			}
+
+			#shoppingBut{
+				background-color: red;
+				cursor:pointer;
+			}
+
+			.sumPara{
+				margin-top:30px;
+				float:right;
+				margin-bottom:40px;
+			}
+
+			.sumPara::after{
+				clear:right;
+			}
+
+
+
+			table{
+				margin-top:60px;
+				
+			}
+
+			#checkoutBut.btn {
+				outline:none;
+				margin-top: 10px;
+				background-color: dodgerblue;
+				border: none;
+				color: white;
+				padding: 12px 16px;
+				font-size: 16px;
+				cursor: pointer;
+				border-radius: 10px;
+				}
+
+			
+			#shoppingBut.btn {
+				outline:none;
+				margin-top: 10px;
+				background-color: rgb(255, 30, 30);
+				border: none;
+				color: white;
+				padding: 12px 16px;
+				font-size: 16px;
+				cursor: pointer;
+				border-radius: 10px;
+				}
+
+				/* Darker background on mouse-over */
+				.btn:hover {
+				background-color: RoyalBlue;
+				}
+
+
+		</style>
+		<script src="../js/myscript.js"></script>
+		<script>
+			window.onload=function(){
+				var picture, name, descript, sellerName, quant, price,category,href,id,listPrice, avgProdRating, description,numSold;
+				var pos, table;				
+				readFromStorage();
+				pos=localStorage.currIndex;
+				document.getElementById('cartCount').innerHTML=calcCartNum();
+				
+				//get reference for table;
+				table=document.getElementById('cartContent')
+
+
+				
+				for(var j=0;j<users[pos].buyer.items.length;j++){
+					picture=users[pos].buyer.items[j].picture;
+					name=users[pos].buyer.items[j].name;
+					description=users[pos].buyer.items[j].description;
+					
+					quant=users[pos].buyer.items[j].quantity;
+					price=users[pos].buyer.items[j].price;
+					category=users[pos].buyer.items[j].category;
+					id=users[pos].buyer.items[j].id;
+					listPrice=users[pos].buyer.items[j].listPrice;
+					avgProdRating=users[pos].buyer.items[j].avgProdRating;
+
+					for(var k=0;k<users.length;k++){
+        				for(var l=0;l<users[k].seller.itemsForSale.length;l++){
+							if(users[k].seller.itemsForSale[l].id==id){
+								sellerName=users[k].info.fName + ' ' + users[k].info.lName;
+								numSold=users[k].seller.numSold;
+							}
+
+						}
+					}		
+					
+					
+					table.innerHTML+=
+					'	<tr tableContent> '
+					+'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+sellerName+'\',\''+numSold+'\');"><img class="preview" src="'+picture+'" alt="picture of '+name+'" /></a> </td> '
+					+'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+sellerName+'\',\''+numSold+'\');"> '+name+'</a></td> '
+					+'		<td><p>'+description+'</p></td> '
+					+'		<td><p>'+sellerName+'</p></td> '								
+					+'		<td>'+quant+'</td> '
+					+'		<td>$'+price+'</td> '					
+					
+				}
+				var resize=table.querySelectorAll('.preview');
+				for(var i=0;i<resize.length;i++){
+					resize[i].style.width='100px';
+					resize[i].style.height='120px'; 
+				}
+
+				
+				var totalarr=document.getElementsByClassName('sumPara');
+				totalarr[0].innerHTML+=users[pos].buyer.total;
+				totalarr[1].innerHTML+=users[pos].buyer.total;
+					
+			
+
+			}
+
+	
+			
+		</script>
+	</head>
+	
+	<body id="CartBod">
+	
+		<header>
+			<div id="moto">The Best online store for all your UWI needs</div> <hr>
+			<div class="container">
+
+				<div id="topEdge" >					
+					
+					<div id="collection">
+						<a id="logoWithCaption" href='index.html'>
+						<div> <img src="../images/logo.png" alt="SAHARA logo"> <span id="logo">SAHARA</span> </div>						
+						</a>					
+							
+						<form class="search" action="Buy.html" onsubmit="return search()">
+							
+							<input type="text" id='searchBox' placeholder="Search..">
+
+							<button><i id='searchIcon' class="fa fa-search"></i></button>
+
+						</form>
+						
+						<ul>
+							<li><a href="Account.html">Account</a></li>
+							<li><a href="Buy.html">Buy</a></li>
+							<li><a href="Sell.html">Sell</a></li>
+							<li><a href="Cart.html">Cart</a><span id="cartCount"></span></li>
+						</ul>
+						
+						<i id="signOutIcon" class="fa fa-sign-out" onclick="logout(); alert('You have been successfully logged out.'); window.open('index.html','_self');"></i>
+						
+					</div>                     
+				</div>
+			</div>
+
+		</header>
+
+
+		<nav id="navBar">
+			<div class="container">
+			<ul>
+					<li><a href="Buy.html">All</a></li>
+					<li><a href="Buy-Electronics.html">Electronics</a></li>
+					<li><a href="Buy-Stationery.html">Stationery</a></li>
+					<li><a href="Buy-Course-Materials.html">Course Materials</a></li>
+					<li><a href="Buy-Dorm-Furnishings.html">Dorm Furnishings</a></li>
+					<li><a href="Buy-Books.html">Books</a></li>
+			</ul>
+		
+			</div>
+		</nav>
+
+		<main id="cart" class= "container">
+			<h2>My Cart</h2>
+
+			<div id="cartTable">					
+					<button id="shoppingBut" class="btn" onclick="location.href='Buy.html';"><i class="fa fa-arrow-left"></i> Continue Shopping</button>
+					<button id="checkoutBut" class="btn" onclick="location.href='Checkout.html';">Checkout <i class="fa fa-arrow-right"></i></button><br>
+				
+					<p  class="sumPara">Order Total: $</p>
+					
+					
+				<table id="cartContent">
+					<tr>
+						<th>Preview</th>
+						<th>Item Name</th>
+						<th>Description</th>
+						<th>Seller</th>
+						<th>Quantity</th> 
+						<th>Price</th>
+					</tr>
+											
+				</table>
+				
+				<p class="sumPara">Order Total: $</p>
+			</div>	
+		</main>
+
+		<footer> 
+			<div class="container"> 
+				<div id="contact">
+					<h3>Contact Us</h3>
+					<ul>
+						<li><a href="tel:(868)000-0000">(868) 000-0000</a></li>
+						<li><a href="mailto:manager@sahara.com">manager@sahara.com</a></li>
+						<li><a href="Construction.html">Location store</a></li>
+					</ul>
+				</div>
+
+				<div id="policies">
+					<h3>Documentation</h3>
+					<ul>
+						<li><a href="../misc/User_Guide.pdf" download>User Guide</a></li>
+						<li><a href="Construction.html">Policy for Sellers</a></li>
+						<li><a href="Construction.html">Policy for Buyers</a></li>    
+					</ul>
+				</div>
+
+				<div id="quickLinks">
+					<h3>Quick Links</h3>
+					<ul>
+						<li><a href="Login.html">Login</a></li>
+						<li><a href="Registration.html">Sign up</a></li>
+						<li><a href="About-Us.html">About Us</a></li>
+					</ul>
+				</div>
+
+				<div id="lastBar"> 
+					<span id="Copyright"> Copyright &copy; 2019 SAHARA </span> 
+					<i class="fa fa-cc-mastercard" style="font-size:16px"></i>
+					<i class="fa fa-cc-visa" style="font-size:16px"></i>
+					<i class="fa fa-cc-discover" style="font-size:16px"></i>
+
+				</div>
+			</div>
+		</footer>	
+		
+	</body>
+</html>

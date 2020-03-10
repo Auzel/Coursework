@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Checkout">
+        <meta name="keywords" content="SAHARA, checkout, credit, card, visa, masterCard, AMEX, purchase, UWI, students">
+        <meta name="author" content="Bevan Labadie, Philmon Roberts, Maria Cadogan">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sahara Checkout</title>  
+		<link rel="shortcut icon" href="../images/desert_512_GYX_icon.ico">
+		<link rel="stylesheet" type="text/css" href="../css/mystyle1.css"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .collapsible {
+                background-color: #777;
+                color: white;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 16px;
+            }
+            
+            .active, .collapsible:hover {
+                background-color: #555;
+            }
+            
+            .content {
+                padding: 0 18px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+                background-color: #f1f1f1;
+            }
+
+            #paymentForm{
+                margin-top:50px;
+                width:80%;
+                
+            }
+
+            .flexContainer{
+                display:flex;
+                align-items:flex-start;
+                
+            }
+
+            .leftFlex{
+                flex:1;
+            }
+
+            .rightFlex{
+                flex:1;
+                display:flex;
+                flex-direction: column;
+            }
+
+            .upperFlex{
+                flex:1;
+                margin-top:20px;
+                margin-bottom:100px;
+            }
+
+            .lowerFlex{
+                flex:1;
+            }
+
+         
+
+           .upperFlex p{  
+               font-weight:bold;         
+               margin-left: 50px;
+               display:inline-block;
+               font-size: 20px;
+               padding-right:30px;              
+           }
+           /*.upperFlex button{
+               cursor: pointer;
+               background-image: linear-gradient(to bottom, #EFAE71, #C20000);
+               width:200px;
+               height:60px;
+               color:white;
+           }
+           .upperFlex button:hover{
+             background-image: linear-gradient(to bottom, #733E0D, #B20000);
+           }
+
+           .upperFlex button:active{
+            color: #FFB2B2;
+           }*/
+
+
+           .upperFlex button {
+            outline:none;
+            width: 130px;
+            height: 40px;
+            background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+            border: none;
+            border-radius: 5px;
+            position: relative;
+            border-bottom: 4px solid #2b8bc6;
+            color: #fbfbfb;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+            text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+            font-size: 15px;
+            text-align: left;
+            text-indent: 5px;
+            box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+            cursor: pointer;
+
+            /* Just for presentation */  
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            }
+            
+            .upperFlex button:active {
+            box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+            top: 1px;
+            }
+
+            .upperFlex button:after {
+            content: "";
+            width: 0;
+            height: 0;
+            display: block;
+            border-top: 20px solid #187dbc;
+            border-bottom: 20px solid #187dbc;
+            border-left: 16px solid transparent;
+            border-right: 20px solid #187dbc;
+            position: absolute;
+            opacity: 0.6; 
+            right: 0;
+            top: 0;
+            border-radius: 0 5px 5px 0;  
+            }
+
+
+           #reviewOrder em{
+               display:block;
+               font-size:17px;
+
+               margin-bottom:30px;
+           }
+
+        </style>
+        <script src="../js/myscript.js"></script>
+        <script> 
+            function checkoutInit(){
+                
+                readFromStorage();
+                var pos=localStorage.currIndex;
+                document.getElementById('cartCount').innerHTML=calcCartNum();
+
+                var coll = document.getElementsByClassName("collapsible");
+                var review;
+                var id,name,category,picture,listPrice,price,avgProdRating,description,sellerName,numSold;
+    
+                for (var i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.maxHeight){
+                        content.style.maxHeight = null;
+                        } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        } 
+                    });
+                }
+
+                document.getElementById('totalPara').innerHTML+='$'+users[pos].buyer.total;
+
+        
+               
+                var review=document.getElementById('insertReview'); 
+
+                //get cart items for checkout
+                for(var j=0;j<users[pos].buyer.items.length;j++){
+					picture=users[pos].buyer.items[j].picture;
+					name=users[pos].buyer.items[j].name;
+					description=users[pos].buyer.items[j].description;
+					
+					quant=users[pos].buyer.items[j].quantity;
+					price=users[pos].buyer.items[j].price;
+					category=users[pos].buyer.items[j].category;
+					id=users[pos].buyer.items[j].id;
+					listPrice=users[pos].buyer.items[j].listPrice;
+					avgProdRating=users[pos].buyer.items[j].avgProdRating;
+
+					for(var k=0;k<users.length;k++){
+        				for(var l=0;l<users[k].seller.itemsForSale.length;l++){
+							if(users[k].seller.itemsForSale[l].id==id){
+								sellerName=users[k].info.fName + ' ' + users[k].info.lName;
+								numSold=users[k].seller.numSold;
+							}
+
+						}
+					}		
+
+                    review.innerHTML+=
+                    '	<tr class="tableContent"> '
+                    +'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+sellerName+'\',\''+numSold+'\');"><img class="preview" src="'+picture+'" alt="picture of '+name+'" /></a> </td> '
+                    +'		<td><a href="Product.html" onclick="newWebPage(\''+id+'\',\''+name+'\',\''+category+'\',\''+picture+'\',\''+listPrice+'\',\''+avgProdRating+'\',\''+description+'\',\''+sellerName+'\',\''+numSold+'\');"> '+name+'</a></td> '								
+                    +'		<td>'+quant+'</td> '
+                    +'		<td>'+price+'</td> '	
+                }
+            
+                var resize=review.querySelectorAll('.preview');
+                for(var i=0;i<resize.length;i++){
+                    resize[i].style.width='70px';
+                    resize[i].style.height='85px'; 
+                }
+
+            }
+
+            function processTransaction(e){
+                e.preventDefault();
+                readFromStorage();
+                var pos=localStorage.currIndex;
+                var check;
+                check=confirm('Your account will be charged $' + users[pos].buyer.total+'. Kindly click OK to proceed or Cancel to return.');
+                if(check) {                  
+                    
+                    
+                    var id, quantity;
+                    //invoke checkout methods (perform double entry for the transaction)
+                    var i=0;
+                    while(users[pos].buyer.items.length){                    
+                        id=users[pos].buyer.items[i].id;
+                        quantity=users[pos].buyer.items[i].quantity;
+                        users[pos].buyer.checkout(id);
+                        for(var j=0;j<users.length;j++){
+                            for(var k=0;k<users[j].seller.itemsForSale.length;k++){
+                                if(users[j].seller.itemsForSale[k].id==id){
+                                    users[j].seller.sellItem(id,quantity);
+                              
+                                }
+                            }
+                        }
+                    }
+
+                    writetoStorage();         
+                    alert('Payment Succssful!'); 
+                    window.open('Account.html','_self');  
+                    return true;      
+                }
+                 return false;   
+            }
+           
+        </script>
+    
+	</head>
+
+	<body onload="checkoutInit()">
+        <header>
+            <div id="moto">The Best online store for all your UWI needs</div> <hr>
+            <div class="container">
+
+                <div id="topEdge" >					
+                    
+                    <div id="collection">
+                        <a id="logoWithCaption" href='index.html'>
+                        <div> <img src="../images/logo.png" alt="SAHARA logo"> <span id="logo">SAHARA</span> </div>						
+                        </a>					
+                            
+                        <form class="search" action="Buy.html" onsubmit="return search()">
+                            
+                            <input type="text" id='searchBox' placeholder="Search..">
+
+                            <button><i id='searchIcon' class="fa fa-search"></i></button>
+
+                        </form>
+                        
+                        <ul>
+                            <li><a href="Account.html">Account</a></li>
+                            <li><a href="Buy.html">Buy</a></li>
+                            <li><a href="Sell.html">Sell</a></li>
+                            <li><a href="Cart.html">Cart</a><span id="cartCount"></span></li>
+                        </ul>
+                        
+                        <i id="signOutIcon" class="fa fa-sign-out" onclick="logout(); alert('You have been successfully logged out.'); window.open('index.html','_self');"></i>
+                        
+                    </div>                     
+                </div>
+            </div>
+
+        </header>
+
+		<main class="container">
+
+            <div class="flexContainer">
+
+                <div class="leftFlex">
+            
+                    <form id="paymentForm" onsubmit="return processTransaction(event)">
+                        <button type="button" id="billing" class="collapsible">Billing Address</button>
+                        <div id="billingAddress" class="content" >
+                        <label>Name: </label><input type="text" required> <br>
+                            <label>Address: </label><input type="text" required> <br>
+                            <label>City: </label><input type="text" required> <br>
+                            <label>Phone Number:</label><input type="text" required>      
+                        </div>
+
+                        <button type="button" class="collapsible">Shipping Address</button>
+                        <div id="shippingAddress" class="content">
+                            <label>Name: </label><input type="text" required> <br>
+                            <label>Address: </label><input type="text" required> <br>
+                            <label>City: </label><input type="text" required> <br>
+                            <label>Phone Number:</label><input type="text" required> 
+                        </div>
+
+                        <button type="button" class="collapsible">Shipping Method</button>
+                        <div id="shippingMethod" class="content">
+                            <label>Shipping Courier:</label> <br>
+                            <input type="radio" name="courier" value="UWI-Express" required>UWI-Express<br>
+                            <input type="radio" name="courier" value="UWI-Saver" required>UWI-Saver<br>
+                            <input type="radio" name="courier" value="UWI-D-N" required>UWI-Day & Night<br>                
+
+                            <label for="estimateDeliv">Estimated Delivery Time: </label> 
+                            <select id="estimateDeliv">
+                                <option value='0'>Next Day (Guaranteed)</option> 
+                                <option value='1-2'>1-2 Business Days</option>
+                                <option value='3-5'>3-5 Business Days</option>
+                                <option value='6-9'>6-9 Business Days</option>    
+                            </select>
+                        </div>
+
+                        <button type="button" class="collapsible">Payment Information</button>
+                        <div id="paymentInfo" class="content">
+                            <label>Payment Method:</label> <br> 
+                            <input type="radio" name="payment" value="Visa" required>Visa<br>
+                            <input type="radio" name="payment" value="MC" required>MasterCard<br>
+                            <input type="radio" name="payment" value="AE" required>American Express<br>
+        
+                            <label>Name on Card: </label><input type="text" required><br>
+                            <label>Credit Card Number: </label><input type="text" required><br>
+                            <label>CVV</label> <input type="text" required>                 
+                        </div>
+                    </form>
+                
+                </div>
+
+                <div class="rightFlex">
+                    <div class="upperFlex">
+                        <p id="totalPara">Your Order Total is: <p>
+                        <button form="paymentForm" type="submit" >Pay Now!</button>
+                    </p>
+                    </div>
+
+                    <div class="lowerFlex">
+                        <div id="reviewOrder">
+                                <em> Review Your Order</em>
+                                <table id='insertReview'>
+                                    <tr>
+                                        <th>Preview</th>
+                                        <th>Item Name</th>                                  
+                                        <th>Quantity</th> 
+                                        <th>Price</th>
+                                    </tr>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+
+           </div>
+
+
+		</main>		
+		<footer> 
+            <div class="container"> 
+                <div id="contact">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="tel:(868)000-0000">(868) 000-0000</a></li>
+                        <li><a href="mailto:manager@sahara.com">manager@sahara.com</a></li>
+                        <li><a href="Construction.html">Location store</a></li>
+                    </ul>
+                </div>
+
+                <div id="policies">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="../misc/User_Guide.pdf" download>User Guide</a></li>
+                        <li><a href="Construction.html">Policy for Sellers</a></li>
+                        <li><a href="Construction.html">Policy for Buyers</a></li>    
+                    </ul>
+                </div>
+
+                <div id="quickLinks">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="Login.html">Login</a></li>
+                        <li><a href="Registration.html">Sign up</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div id="lastBar"> 
+                    <span id="Copyright"> Copyright &copy; 2019 SAHARA </span> 
+                    <i class="fa fa-cc-mastercard" style="font-size:16px"></i>
+                    <i class="fa fa-cc-visa" style="font-size:16px"></i>
+                    <i class="fa fa-cc-discover" style="font-size:16px"></i>
+
+                </div>
+            </div>
+        </footer>
+		
+	</body>
+</html>
