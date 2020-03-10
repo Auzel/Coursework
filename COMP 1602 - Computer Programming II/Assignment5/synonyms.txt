@@ -1,0 +1,68 @@
+Appliance	Refrigerator	Stove	Microwave											
+Baby	Child	kid 	toddler	chile	boy	girl	son	daughter						
+Bathroom	restroom	washroom												
+Boat	yacht													
+Body	figure	shape 	form											
+Book	magazine	novel	bestseller	publication										
+Buddy	friend	pal 	mate	sidekick	dan	hoss	horse	friends						
+Candy	chocolate	sweet												
+Car	vehicle	automobile	convertible	ride										
+Card														
+Cash	Money	dough												
+Chairs	Seating													
+Church	temple	mosque	chapel	cathedral										
+Clean	wash	tidy	scrub											
+Clothes	dress	suit	gown	clothing	outfit	laundry								
+Cold	chilly	freezing												
+Communication	conversation	talking												
+Computer	PC	Laptop	Notebook											
+Condiments	Ketchup	Mustard	Pepper											
+Cops	Police	Powpow												
+Corn														
+Cute	nice	pretty	beautiful											
+Date	boyfriend	girlfriend	husband	wife	escort	partner	sweetheart	honey	boo	babe	bearcat	sweetie	squeeze	spouse
+Debt	arrears	credit												
+Doctor	doc	healer												
+Dog	puppy	doggy												
+Drink	liquor	alco	beers											
+Facebook	FB													
+Family	kin	kinfolk	folks	parents	mother	father								
+Flowers	roses													
+Food	grub	breakfast	dinner	bureau										
+Fries	chips													
+Furniture	cabinet	dresser	wardrobe	bureau										
+Game	PlayStation	Nintendo	Xbox											
+Goon	criminals	hooligan	hood	thug	bozo									
+Greedy	licorice													
+Groceries	supplies	market	goods											
+Hairy	shaggy	fuzzy	frizzy											
+Hibernate	sleep	hide												
+Itchy	scratchy													
+Jewelry	gold	diamonds	bling											
+Job	work	employ	PJ											
+Keys														
+Loyal	devoted	caring	obedient											
+Male	boy 	man	hunk	macho										
+Mattress	bed													
+Mobile	Cell													
+Monster	demon	devil	giant											
+Music	tune													
+Nightmare	horror	ghost												
+Noise	crash	explosion	roar	cry	fireworks	gunshots								
+Passionate	hot	lust												
+Perfume	smell	cologne												
+Pickles	relish													
+Playful	fun	frisky	cheerful											
+Purse	handbag	sachel	bag	wallet										
+Relationship	love	marriage	affair	hookup										
+Salad	greens	coleslaw												
+School	Studying	university	grades	work	study									
+Shoes	sandals	sneakers	slippers											
+Sibling	brother	sister	relative											
+Soup														
+Stranger	unknown													
+Television	TV	tele												
+Thirsty	hungry	parched												
+Trip	voyage	vacation	lime											
+Voucher	certificate													
+Yourself	me	I	oneself
