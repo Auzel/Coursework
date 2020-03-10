@@ -1,0 +1,13 @@
+Node * createNode (char c);
+Node * insertAtTail (Node * top, char c);
+Node * getLast (Node * top);
+Node * insertAtTail (Node * top, char c) ;
+Node * recursiveCopy (Node *top);
+Node * removeAll (Node *top, char c);
+Node * nonRecRemoveAll (Node *top, char c);
+Node * nonRecursiveMerge (Node *top1, Node *top2);
+int compare (Node * top1, Node * top2);
+void nonRecursivePrint(Node * top);
+Node * nthNodeFromEnd(Node* top, int n);
+Node * segregateEvenOdd(Node * top);
+Node* printList(Node* top);
